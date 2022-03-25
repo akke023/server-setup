@@ -1,19 +1,19 @@
-version: '3'							Docker Compose versie
-services:							Services die moeten draaien (begin)
-  file-browser:							Service 1 (Filebrowser)
-    image: filebrowser/filebrowser				Repo van image
-    container_name: file-browser				Naam van de Docker Container
-    user: 0033:0033						User die docker draait
-    ports:							Ports waarop ze draait [in:out]
+version: '3'						 	#Docker Compose versie
+services:							#Services die moeten draaien (begin)
+  file-browser:							#Service 1 (Filebrowser)
+    image: filebrowser/filebrowser				#Repo van image
+    container_name: file-browser				#Naam van de Docker Container
+    user: 0033:0033						#User die docker draait
+    ports:							#Ports waarop ze draait [in:out]
       - "8080:80"
-    volumes:							Folders die geshared worden [in:out]
+    volumes:							#Folders die geshared worden [in:out]
       - /data/:/srv
       - /filebrowser/filebrowser.db:/database.db
-    restart: on-failure						Wanneer herstarten
-  ethercalc:							Service 2 (EtherCalc)
-    image: audreyt/ethercalc					Repo van image
-    container_name: etherpad					Container naam
-    ports:							Ports waarop ze draait [in:out]
+    restart: on-failure						#Wanneer herstarten
+  ethercalc:							#Service 2 (EtherCalc)
+    image: audreyt/ethercalc					#Repo van image
+    container_name: etherpad					#Container naam
+    ports:							#Ports waarop ze draait [in:out]
       - "80:8000"
     environment:	
       REDIS_PORT_6379_TCP_ADDR: redis
