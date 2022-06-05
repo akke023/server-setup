@@ -194,7 +194,7 @@ echo -e "${green}Done!${nocolor}"
 sleep 1
 echo
 #------Installing Docker & Containerd-----#
-echo -e "${green}Installing Docker & Containerd...{nocolor}"
+echo -e "${green}Installing Docker & Containerd...${nocolor}"
 sudo apt update
 sudo apt install -y containerd.io docker-ce docker-ce-cli
 #-----Making directories------#
@@ -267,7 +267,7 @@ EOF
 			sleep 1
 			echo
 			#-----Adding Pod Network; According to CALICO-----#
-			echo -e "${green}Starting the clusting using CALICO...${nocolor}"
+			echo -e "${green}Starting the cluster using CALICO...${nocolor}"
 			sudo kubeadm init \
   --pod-network-cidr=192.168.0.0/16 \
   --upload-certs \
