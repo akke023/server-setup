@@ -294,6 +294,9 @@ EOF
 			#-----Installing Dashboard-----#
 			curl https://raw.githubusercontent.com/akke023/server-setup/main/kubernetes-dashboard-deployment.yml -o kubernetes-dashboard.yml
 			sudo kubectl apply -f kubernetes-dashboard.yml
+			#-----Installing Kube-Admin-----#
+			curl https://raw.githubusercontent.com/akke023/server-setup/main/admin-user.yml -o dashboard-admin-user.yml
+			sudo kubectl apply -f dashboard-admin-user.yml
 			#-----Finishing up....------#
 			clear
 			echo -e "${green}Currently running pods:${nocolor}"
@@ -304,6 +307,8 @@ EOF
 			kubeadm token create --print-join-command
 			echo -e "${green}Dashboard NodePort:${nocolor}"
 			kubectl get service -n kubernetes-dashboard
+			echo -e "${green}Admin Dashboard Token:${nocolor}"
+			kubectl -n kubernetes-dashboard create token admin-user	
 
 	
 		fi
