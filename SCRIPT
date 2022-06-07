@@ -286,9 +286,10 @@ EOF
 			sudo mkdir /webservice/
 			#-----Configuring CALICO-----#
 			cd /webservice/ || exit
-			curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O
+			curl https://raw.githubusercontent.com/akke023/server-setup/main/calico.yaml -O
 			kubectl apply -f calico.yaml
 			# This one always taints:
+			sudo kubectl taint node kmaster node-role.kubernetes.io/master:NoSchedule-
 			sudo kubectl taint node kmaster node-role.kubernetes.io/control-plane:NoSchedule-
 			#-----Finishing up....------#
 			clear
