@@ -291,6 +291,9 @@ EOF
 			# This one always taints:
 			sudo kubectl taint node kmaster node-role.kubernetes.io/master:NoSchedule-
 			sudo kubectl taint node kmaster node-role.kubernetes.io/control-plane:NoSchedule-
+			#-----Installing Dashboard-----#
+			curl https://raw.githubusercontent.com/akke023/server-setup/main/kubernetes-dashboard-deployment.yml -o kubernetes-dashboard.yml
+			sudo kubectl apply -f kubernetes-dashboard.yml
 			#-----Finishing up....------#
 			clear
 			echo -e "${green}Currently running pods:${nocolor}"
@@ -299,6 +302,8 @@ EOF
 			echo -e "${green}To watch your pods use:${nocolor}"" [sudo kubectl get pods --all-namespaces]"		
 			echo -e "${green}To add a slave machine use token:${nocolor}"
 			kubeadm token create --print-join-command
+			echo -e "${green}Dashboard NodePort:${nocolor}"
+			kubectl get service -n kubernetes-dashboard
 
 	
 		fi
