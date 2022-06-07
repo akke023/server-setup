@@ -12,7 +12,7 @@
 # en dat de updates & upgrades gebeurt zijn.
 # Zet de SWAP uit!
 #
-# V1.4 - Arno De Keersmaeker
+# V1.16 - Arno De Keersmaeker
 ###########
 # COLOURS #
 green='\033[0;32m'
@@ -268,11 +268,8 @@ EOF
 			echo
 			#-----Adding Pod Network; According to CALICO-----#
 			echo -e "${green}Starting the cluster using CALICO...${nocolor}"
-			sudo kubeadm init \
-  --pod-network-cidr=192.168.0.0/16 \
-  --upload-certs \
-  --control-plane-endpoint=kmaster
-  			echo -e "${green}Done!${nocolor}"
+			sudo kubeadm init --pod-network-cidr=10.10.0.0/16
+    			echo -e "${green}Done!${nocolor}"
 			sleep 1
 			echo
 			#-----Finalising...-----#
