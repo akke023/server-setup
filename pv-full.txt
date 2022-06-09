@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: standard-pv-etherpad
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+          namespace: default
+          name: etherpad-claim0
+  hostPath:
+    path: "/webservice"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: standard-pv-file-browser0
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+      namespace: default
+      name: file-browser-claim0
+  hostPath:
+    path: "/webservice"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: standard-pv-file-browser1
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+        namespace: default
+        name: file-browser-claim1
+  hostPath:
+    path: "/webservice"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: standard-pv-redis
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+          namespace: default
+          name: redis-claim0
+  hostPath:
+    path: "/webservice"
