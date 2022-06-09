@@ -89,8 +89,6 @@ spec:
           ports:
             - containerPort: 9001
           resources: {}
-          volumeMounts:				#weglaten bij error
-            - mountPath: /etherpad/		#weglaten bij error
       restartPolicy: Always
 ---
 apiVersion: v1
