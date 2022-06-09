@@ -297,6 +297,16 @@ EOF
 			#-----Installing Kube-Admin-----#
 			curl https://raw.githubusercontent.com/akke023/server-setup/main/admin-user.yml -o dashboard-admin-user.yml
 			sudo kubectl apply -f dashboard-admin-user.yml
+			#-----Pulling Pods....-----#
+			curl https://raw.githubusercontent.com/akke023/server-setup/main/pods-FULL2.yaml -o pods-FULL.yaml
+			curl https://raw.githubusercontent.com/akke023/server-setup/main/pv-full.yaml -o pv-FULL.yaml
+			curl https://raw.githubusercontent.com/akke023/server-setup/main/StorageClasses.yaml -o storageclasses.yaml
+			curl https://raw.githubusercontent.com/akke023/server-setup/main/pvc-full.yaml -o pvc-FULL.yaml
+			#-----Installing Pods....-----#
+			sudo kubectl apply -f storageclasses.yaml
+			sudo kubectl apply -f pv-FULL.yaml
+			sudo kubectl apply -f pvc-FULL.yaml
+			sudo kubectl apply -f pods-FULL.yaml
 			#-----Finishing up....------#
 			clear
 			echo -e "${green}Currently running pods:${nocolor}"
