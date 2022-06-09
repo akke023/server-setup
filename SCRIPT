@@ -310,6 +310,13 @@ EOF
 			sudo kubectl apply -f pv-FULL.yaml
 			sudo kubectl apply -f pvc-FULL.yaml
 			sudo kubectl apply -f pods-FULL.yaml
+			#-----Adding IP's-----#
+			ethercalc:
+			sudo kubectl patch svc ethercalc -p '{"spec":{"externalIPs":["10.104.100.58"]}}'
+			etherpad:
+			sudo kubectl patch svc etherpad -p '{"spec":{"externalIPs":["10.104.100.58"]}}'
+			file-browser:
+			sudo kubectl patch svc file-browser -p '{"spec":{"externalIPs":["10.104.100.58"]}}'
 			#-----Finishing up....------#
 			clear
 			echo -e "${green}Currently running pods:${nocolor}"
@@ -320,6 +327,7 @@ EOF
 			kubeadm token create --print-join-command
 			echo -e "${green}To start Kubernetes Dashboard in the background use:${nocolor}"" [sudo kubectl proxy --address='0.0.0.0' --accept-hosts='.*' &] and [bg] or [fg] to bring it back."	
 			echo -e "${green}Dashboard NodePort:${nocolor}"
+			echo -e "${green}To assign External IP to Service use:${nocolor}"" [sudo kubectl patch svc <service-name> -p '{"spec":{"externalIPs":["<ip-addres>"]}}']"	
 			kubectl get service -n kubernetes-dashboard
 			echo -e "${green}Admin Dashboard Token:${nocolor}"
 			kubectl -n kubernetes-dashboard create token admin-user	
