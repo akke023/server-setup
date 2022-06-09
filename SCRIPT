@@ -22,114 +22,114 @@ nocolor='\033[0m'
 ##########DOCKER & COMPOSE##########
 
 # Explanation #
-clear
-echo -e "${green}This script will install Docker & Kubernetes, with a custom docker-compose file.${nocolor}"
-echo -e "${green}And all of their needed prequisites and settings, to get a default set up.${nocolor}"
-read -p "$(echo -e $red"Press any key to continue."$nocolor)"
-clear
-echo -e "${green}Checking for and applying updates, this may take a while.${nocolor}"
-sleep 1
-sudo apt update -y
-sudo apt upgrade -y
-echo -e "${green}Done!${nocolor}"
-sleep 1
-echo
-clear
-echo -e "${green}Installing net-tools & adding needed directories...${nocolor}"
-echo -e "${green}These contain:${nocolor}"
-echo -e "${green}- /cloud/${nocolor}"
-echo -e "${green}- /webservice/filebrowser${nocolor}"
-echo -e "${green}-           ./etherpad${nocolor}"
-echo -e "${green}-           ./ethercalc${nocolor}"
-echo
+# clear
+#echo -e "${green}This script will install Docker & Kubernetes, with a custom docker-compose file.${nocolor}"
+#echo -e "${green}And all of their needed prequisites and settings, to get a default set up.${nocolor}"
+#read -p "$(echo -e $red"Press any key to continue."$nocolor)"
+#clear
+#echo -e "${green}Checking for and applying updates, this may take a while.${nocolor}"
+#sleep 1
+#sudo apt update -y
+#sudo apt upgrade -y
+#echo -e "${green}Done!${nocolor}"
+#sleep 1
+#echo
+#clear
+#echo -e "${green}Installing net-tools & adding needed directories...${nocolor}"
+#echo -e "${green}These contain:${nocolor}"
+#echo -e "${green}- /cloud/${nocolor}"
+#echo -e "${green}- /webservice/filebrowser${nocolor}"
+#echo -e "${green}-           ./etherpad${nocolor}"
+#echo -e "${green}-           ./ethercalc${nocolor}"
+#echo
 
 #-----apt installs-----#
-sudo apt install -y net-tools
+#sudo apt install -y net-tools
 
 #-----Adding directories-----#
-sudo mkdir /cloud/						# Filebrowser data dir
-sudo mkdir /webservice/					# DOCKER COMPOSE LOCATION
-sudo mkdir /webservice/filebrowser/		# FILEBROWSER CONFIG
-sudo mkdir /webservice/etherpad/		# ETHERPAD CONFIG
-sudo mkdir /webservice/ethercalc		# ETHERCALC CONFIG
+#sudo mkdir /cloud/						# Filebrowser data dir
+#sudo mkdir /webservice/					# DOCKER COMPOSE LOCATION
+#sudo mkdir /webservice/filebrowser/		# FILEBROWSER CONFIG
+#sudo mkdir /webservice/etherpad/		# ETHERPAD CONFIG
+#sudo mkdir /webservice/ethercalc		# ETHERCALC CONFIG
 
-echo -e "${green}Done!${nocolor}"
-sleep 1
-echo
-clear
-echo -e "${green}Installing Docker & Docker Compose... ${nocolor}"
+#echo -e "${green}Done!${nocolor}"
+#sleep 1
+#echo
+#clear
+#echo -e "${green}Installing Docker & Docker Compose... ${nocolor}"
 #-----curl installs-----#
 # Docker-engine
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg --yes
+#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg --yes
 # Docker-Compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 #-----repo adds-----#
 # Docker-engine
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+#echo \
+#  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+#  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 #-----apt installs AFTER curl or repo-----#
 # Docker-engine
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+#sudo apt-get update
+#sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 #-----extra config-----#
 # Docker-Compose
-sudo chmod +x /usr/local/bin/docker-compose
+#sudo chmod +x /usr/local/bin/docker-compose
 
-echo -e "${green}Done!${nocolor}"
-sleep 1
-echo
+#echo -e "${green}Done!${nocolor}"
+#sleep 1
+#echo
 #-----Location info-----#
-clear
-echo -e "${green}Pulling docker-compose file from github into: ${nocolor}""[/webservice/docker-compose.yaml]"
-sleep 1
+#clear
+#echo -e "${green}Pulling docker-compose file from github into: ${nocolor}""[/webservice/docker-compose.yaml]"
+#sleep 1
 
 #-----Create the docker-compose file from my github:-----#
-cd /webservice/ || exit
-sudo curl https://raw.githubusercontent.com/akke023/server-setup/main/docker-compose.yaml?token=GHSAT0AAAAAABUKIMNODZIHRWQNDDELM4PIYUCIZDQ | sudo tee docker-compose.yml
-echo -e "${green}Done!${nocolor}"
-sleep 1
-echo
+#cd /webservice/ || exit
+#sudo curl https://raw.githubusercontent.com/akke023/server-setup/main/docker-compose.yaml?token=GHSAT0AAAAAABUKIMNODZIHRWQNDDELM4PIYUCIZDQ | sudo tee docker-compose.yml
+#echo -e "${green}Done!${nocolor}"
+#sleep 1
+#echo
 
 #-----Setting Permissions-----#
-echo -e "${green}Setting up permissions...${nocolor}"
-sleep 1
-sudo touch /webservice/filebrowser/filebrowser.db
-sudo chown www-data:www-data /webservice/filebrowser/filebrowser.db
-sudo chown www-data:www-data /cloud/
-echo -e "${green}Done!${nocolor}"
-sleep 1
-echo
+#echo -e "${green}Setting up permissions...${nocolor}"
+#sleep 1
+#sudo touch /webservice/filebrowser/filebrowser.db
+#sudo chown www-data:www-data /webservice/filebrowser/filebrowser.db
+#sudo chown www-data:www-data /cloud/
+#echo -e "${green}Done!${nocolor}"
+#sleep 1
+#echo
 #-----Docker-compose info-----#
-clear
-echo -e "${green}Creating the containers...${nocolor}"
-sleep 1
+#clear
+#echo -e "${green}Creating the containers...${nocolor}"
+#sleep 1
 
 #-----Apply docker-compose file:-----#
-sudo docker-compose up -d --force-recreate
-echo -e "${green}Done!${nocolor}"
-sleep 1
-echo
+#sudo docker-compose up -d --force-recreate
+#echo -e "${green}Done!${nocolor}"
+#sleep 1
+#echo
 #-----Post-Install Info-----#
-clear
-echo -e "${green}Currently installed Ubuntu version:${nocolor}"
-lsb_release -r
-echo
-echo -e "${green}Currently installed docker version:${nocolor}"
-docker -v
-echo
-echo -e "${green}Currently installed docker-compose version:${nocolor}"
-docker-compose -v
-echo
-echo -e "${green}Any remaining updates?${nocolor}"
-/usr/lib/update-notifier/apt-check --human-readable
-echo
-read -p "$(echo -e $red"Press any key to view docker processes."$nocolor)"
-clear
-sudo docker ps
+#clear
+#echo -e "${green}Currently installed Ubuntu version:${nocolor}"
+#lsb_release -r
+#echo
+#echo -e "${green}Currently installed docker version:${nocolor}"
+#docker -v
+#echo
+#echo -e "${green}Currently installed docker-compose version:${nocolor}"
+#docker-compose -v
+#echo
+#echo -e "${green}Any remaining updates?${nocolor}"
+#/usr/lib/update-notifier/apt-check --human-readable
+#echo
+#read -p "$(echo -e $red"Press any key to view docker processes."$nocolor)"
+#clear
+#sudo docker ps
 ######## TEST: docker -v & docker-compose -v #######
 
 ########KUBERNETES CORE 1/3#######
@@ -297,6 +297,9 @@ EOF
 			#-----Installing Kube-Admin-----#
 			curl https://raw.githubusercontent.com/akke023/server-setup/main/admin-user.yml -o dashboard-admin-user.yml
 			sudo kubectl apply -f dashboard-admin-user.yml
+			#-----Configuring File-browser-----#
+			sudo mkdir /webservice/filebrowser/
+			sudo touch /webservice/filebrower/database.db
 			#-----Pulling Pods....-----#
 			curl https://raw.githubusercontent.com/akke023/server-setup/main/pods-FULL2.yaml -o pods-FULL.yaml
 			curl https://raw.githubusercontent.com/akke023/server-setup/main/pv-full.yaml -o pv-FULL.yaml
