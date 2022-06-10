@@ -244,7 +244,7 @@ EOF
 		kubeadm token create --print-join-command
 	fi
 
-fi
+
 if [ "$answer1" = N ] || [ "$answer1" = n ] || [ "$answer1" = S ] || [ "$answer1" = s ] || [ "$answer1" = Slave ] || [ "$answer1" = slave ] || [ "$answer1" = SLAVE ] # Slave
 	then
 	#-----Kubernetes Core-Tools-----#
