@@ -196,16 +196,6 @@ EOF
 			sudo kubectl apply -f pods-FULL.yaml
 			#-----Adding IP's-----#
 			clear
-			echo -e "${green}What is your IP addres (Subnet is not required)?${nocolor}"
-			read answer4	
-			#ethercalc:
-			sudo kubectl patch svc ethercalc -p '{"spec":{"externalIPs":["$answer4"]}}'
-			#etherpad:
-			sudo kubectl patch svc etherpad -p '{"spec":{"externalIPs":["$answer4"]}}'
-			#file-browser:
-			sudo kubectl patch svc file-browser -p '{"spec":{"externalIPs":["$answer4"]}}'
-			#-----Finishing up....------#
-			clear
 			echo -e "${green}Currently running pods:${nocolor}"
 			kubectl get pods --all-namespaces
 			echo -e "${green}If you see this, your MASTER is WORKING!${nocolor}"
