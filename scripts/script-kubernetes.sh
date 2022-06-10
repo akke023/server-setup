@@ -205,7 +205,8 @@ EOF
 			echo -e "${green}To start Kubernetes Dashboard in the background use:${nocolor}"" [sudo kubectl proxy --address='0.0.0.0' --accept-hosts='.*' &]${green} and${nocolor} [bg]${green} or${nocolor} [fg]${green} to bring it back.${nocolor}"	
 			echo -e "${green}Dashboard NodePort:${nocolor}"
 			kubectl get service -n kubernetes-dashboard
-			echo -e "${green}To assign a different External IP to a Service use:${nocolor}"" [sudo kubectl patch svc <service-name> -p '{"spec":{"externalIPs":["<ip-addres>"]}}']"	
+			echo -e "${green}To assign a different External IP to a Service use:${nocolor}"
+			echo "[sudo kubectl patch svc <service-name> -p '{"spec":{"externalIPs":[<"ip-addres">]}}']"
 			echo -e "${green}Admin Dashboard Token:${nocolor}"
 			kubectl -n kubernetes-dashboard create token admin-user
 		fi
