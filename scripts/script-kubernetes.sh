@@ -43,7 +43,7 @@ if [ "$answer1" = Y ] || [ "$answer1" = y ] || [ "$answer1" = M ] || [ "$answer1
 	#-----Status-Check-----#
 	clear
 	echo -e "${green}Currently installed kubectl & kubeadm versions:${nocolor}"
-	kubectl version --client && kubeadm version
+	kubectl version --client --short && kubeadm version --short
 	read -p "$(echo -e $red"Press any key to continue. Press [CTRL+C] if the instalation has failed."$nocolor)"	
 	#-----Turn-off Swap-----#
 	echo -e "${green}Configuring swaps, kernels & sysconfigs...${nocolor}"
