@@ -318,6 +318,7 @@ EOF
 	echo -e "${green}Install complete!${nocolor}"
 	clear
 	rm /etc/containerd/config.toml
+	systemctl restart containerd
 	echo -e "${green}In order for the slave to join the master, please execute the command shown at the end of the MASTER instalation.${nocolor}"
 	echo -e "${green}If no join command was given please enter the following into the MASTER:${nocolor}"
 	echo "sudo kubeadm token create --print-join-command"
