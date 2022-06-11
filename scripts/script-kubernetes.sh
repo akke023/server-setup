@@ -237,6 +237,12 @@ EOF
 fi
 if [ "$answer1" = N ] || [ "$answer1" = n ] || [ "$answer1" = S ] || [ "$answer1" = s ] || [ "$answer1" = Slave ] || [ "$answer1" = slave ] || [ "$answer1" = SLAVE ] # Slave
 	then
+	echo -e "${green}Please give us a unique Slave ID, make sure to check it is in fact, unique!${nocolor}"
+	read answer5
+	sudo hostnamectl set-hostname kslave-$answer5
+		sudo tee -a /etc/hosts <<EOF
+localhost       kslave-$answer5
+EOF
 	#-----Kubernetes Core-Tools-----#
 	clear
 	echo -e "${green}Installing Core-Tools...${nocolor}"
@@ -289,7 +295,7 @@ EOF
 	sudo apt update
 	sudo apt install -y containerd.io docker-ce docker-ce-cli
 	#-----Making directories------#
-		sudo mkdir -p /etc/systemd/system/docker.service.d
+	sudo mkdir -p /etc/systemd/system/docker.service.d
 	#-----Make custom daemon json config file-----#
 	sudo tee /etc/docker/daemon.json <<EOF
 {
