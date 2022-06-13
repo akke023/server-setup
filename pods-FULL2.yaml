@@ -34,8 +34,23 @@ spec:
           ports:
             - containerPort: 8000
           resources: {}
-      nodeSelector:
-             kubernetes.io/hostname: "kslave-1"
+      affinity:
+              nodeAffinity:
+                      preferredDuringSchedulingIgnoredDuringExecution:
+                              - weight: 2
+                                preference:
+                                      matchExpressions:
+                                              - key: kubernetes.io/hostname
+                                                operator: In
+                                                values:
+                                                        - kslave-1
+                              - weight: 1
+                                preference:
+                                      matchExpressions:
+                                              - key: kubernetes.io/hostname
+                                                operator: In
+                                                values:
+                                                        - kslave-2
       restartPolicy: Always
 status: {}
 ---
@@ -91,8 +106,23 @@ spec:
           ports:
             - containerPort: 9001
           resources: {}
-      nodeSelector:
-             kubernetes.io/hostname: "kslave-1"
+      affinity:
+              nodeAffinity:
+                      preferredDuringSchedulingIgnoredDuringExecution:
+                              - weight: 2
+                                preference:
+                                      matchExpressions:
+                                              - key: kubernetes.io/hostname
+                                                operator: In
+                                                values:
+                                                        - kslave-1
+                              - weight: 1
+                                preference:
+                                      matchExpressions:
+                                              - key: kubernetes.io/hostname
+                                                operator: In
+                                                values:
+                                                        - kslave-2
       restartPolicy: Always
 status: {}
 ---
@@ -127,6 +157,23 @@ metadata:
     io.kompose.service: file-browser
   name: file-browser
 spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 2
+        preference:
+          matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - kslave-1
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - kslave-2
   containers:
     - image: filebrowser/filebrowser
       name: file-browser
@@ -146,8 +193,6 @@ spec:
     - name: file-browser-claim1
       persistentVolumeClaim:
         claimName: file-browser-claim1
-  nodeSelector:
-             kubernetes.io/hostname: "kslave-1"
 status: {}
 ---
 apiVersion: v1
@@ -212,4 +257,21 @@ spec:
         - name: redis-claim0
           persistentVolumeClaim:
             claimName: redis-claim0
+      affinity:
+              nodeAffinity:
+                      preferredDuringSchedulingIgnoredDuringExecution:
+                              - weight: 2
+                                preference:
+                                      matchExpressions:
+                                              - key: kubernetes.io/hostname
+                                                operator: In
+                                                values:
+                                                        - kslave-1
+                              - weight: 1
+                                preference:
+                                      matchExpressions:
+                                              - key: kubernetes.io/hostname
+                                                operator: In
+                                                values:
+                                                        - kslave-2
 status: {}
