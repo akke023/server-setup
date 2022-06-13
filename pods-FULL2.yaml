@@ -34,6 +34,8 @@ spec:
           ports:
             - containerPort: 8000
           resources: {}
+      nodeSelector:
+             kubernetes.io/hostname: "kslave-1"
       restartPolicy: Always
 status: {}
 ---
@@ -89,7 +91,10 @@ spec:
           ports:
             - containerPort: 9001
           resources: {}
+      nodeSelector:
+             kubernetes.io/hostname: "kslave-1"
       restartPolicy: Always
+status: {}
 ---
 apiVersion: v1
 kind: Service
@@ -141,6 +146,8 @@ spec:
     - name: file-browser-claim1
       persistentVolumeClaim:
         claimName: file-browser-claim1
+  nodeSelector:
+             kubernetes.io/hostname: "kslave-1"
 status: {}
 ---
 apiVersion: v1
