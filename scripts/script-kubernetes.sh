@@ -181,7 +181,7 @@ EOF
 			then
 			#-----Configuring File-browser-----#
 			sudo mkdir /webservice/filebrowser/
-			sudo touch /webservice/filebrower/database.db
+			sudo touch /webservice/filebrowser/database.db
 			#-----Pulling Pods....-----#
 			sudo mkdir /webservice/pods/
 			cd /webservice/pods/ || exit
