@@ -185,14 +185,6 @@ spec:
           name: file-browser-claim0
         - mountPath: webservice/filebrowser/database.db
           name: file-browser-claim1
-  tolerations:
-  - key: node.kubernetes.io/not-ready
-    effect: NoExecute
-    tolerationSeconds: 0
-  - key: node.kubernetes.io/unreachable
-    effect: NoExecute
-    tolerationSeconds: 0
-  restartPolicy: OnFailure
   restartPolicy: OnFailure
   volumes:
     - name: file-browser-claim0
