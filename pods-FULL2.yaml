@@ -146,54 +146,77 @@ spec:
 status:
   loadBalancer: {}
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-browser
+  labels:
+    app: file-browser
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file-browser
+  template:
+    metadata:
+      labels:
+        app: file-browser
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 2
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - kslave-1
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - kslave-2
+      containers:
+        - image: filebrowser/filebrowser
+          name: file-browser
+          ports:
+            - containerPort: 80
+          resources: {}
+          volumeMounts:
+            - mountPath: /srv
+              name: file-browser-claim0
+            - mountPath: webservice/filebrowser/database.db
+              name: file-browser-claim1
+      restartPolicy: Always
+      volumes:
+        - name: file-browser-claim0
+          persistentVolumeClaim:
+            claimName: file-browser-claim0
+        - name: file-browser-claim1
+---
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
   annotations:
     kompose.cmd: kompose convert
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
-    io.kompose.service: file-browser
+    app: file-browser
   name: file-browser
 spec:
-  affinity:
-    nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 2
-        preference:
-          matchExpressions:
-          - key: kubernetes.io/hostname
-            operator: In
-            values:
-            - kslave-1
-      - weight: 1
-        preference:
-          matchExpressions:
-          - key: kubernetes.io/hostname
-            operator: In
-            values:
-            - kslave-2
-  containers:
-    - image: filebrowser/filebrowser
-      name: file-browser
-      ports:
-        - containerPort: 80
-      resources: {}
-      volumeMounts:
-        - mountPath: /srv
-          name: file-browser-claim0
-        - mountPath: webservice/filebrowser/database.db
-          name: file-browser-claim1
-  restartPolicy: OnFailure
-  volumes:
-    - name: file-browser-claim0
-      persistentVolumeClaim:
-        claimName: file-browser-claim0
-    - name: file-browser-claim1
-      persistentVolumeClaim:
-        claimName: file-browser-claim1
-status: {}
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 8080
+  selector:
+    app: file-browser
+status:
+  loadBalancer: {}
+
 ---
 apiVersion: v1
 kind: Service
