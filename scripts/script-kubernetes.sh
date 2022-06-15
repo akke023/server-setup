@@ -170,6 +170,8 @@ EOF
 		then
 		curl https://raw.githubusercontent.com/akke023/server-setup/main/kubernetes-dashboard-deployment.yml -o kubernetes-dashboard.yml
 		sudo kubectl apply -f kubernetes-dashboard.yml
+		#-----Adding Cronjobs as well-----#
+		curl https://raw.githubusercontent.com/akke023/server-setup/main/cronjobs.yaml -o cronjobs.yaml
 		#-----Installing Kube-Admin-----#
 		curl https://raw.githubusercontent.com/akke023/server-setup/main/admin-user.yml -o dashboard-admin-user.yml
 		sudo kubectl apply -f dashboard-admin-user.yml
