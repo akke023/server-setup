@@ -44,7 +44,7 @@ metadata:
 spec:
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 1
-  schedule: '2 * * * *' 
+  schedule: '*/2 * * * *' 
   jobTemplate:
     spec:
       backoffLimit: 2 # this has very low chance of failing, as all this does
