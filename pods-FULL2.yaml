@@ -189,6 +189,23 @@ spec:
         ports:
            - containerPort: 80
         resources: {}
+      affinity:
+              nodeAffinity:
+                      preferredDuringSchedulingIgnoredDuringExecution:
+                              - weight: 2
+                                preference:
+                                      matchExpressions:
+                                              - key: kubernetes.io/hostname
+                                                operator: In
+                                                values:
+                                                        - kslave-1
+                              - weight: 1
+                                preference:
+                                      matchExpressions:
+                                              - key: kubernetes.io/hostname
+                                                operator: In
+                                                values:
+                                                        - kslave-2
 status: {}
 ---
 apiVersion: v1
